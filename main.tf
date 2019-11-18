@@ -32,7 +32,7 @@ resource "ibm_compute_vm_instance" "ans_webapp1" {
     script = "awx_install.sh"
   }
 
-  
+
   # provisioner "ansible" {
   #   plays {
   #     playbook = {
@@ -50,15 +50,6 @@ resource "ibm_compute_vm_instance" "ans_webapp1" {
   # }    
 }
 
-
-
-data "ibm_resource_group" "group" {
-  name = "default"
-}
-
-variable "insecure_no_strict_host_key_checking" {
-  default = true
-}
 
 
       

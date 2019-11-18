@@ -28,21 +28,26 @@ resource "ibm_compute_vm_instance" "ans_webapp1" {
     //user = "root"
     private_key = "${var.ssh_private_key}"
   }
-  provisioner "ansible" {
-    plays {
-      playbook = {
-        file_path = "${path.module}/ansible-data/playbooks/install-tree.yml"
-        roles_path = [
-            "${path.module}/ansible-data/roles"
-        ]
-      }
-      groups = ["servers"]
-      verbose = true
-    }
-    ansible_ssh_settings {
-      insecure_no_strict_host_key_checking = "${var.insecure_no_strict_host_key_checking}"
-    }
-  }    
+  provisioner "remote-exec" {
+    script = "awx_install.sh"
+  }
+
+  
+  # provisioner "ansible" {
+  #   plays {
+  #     playbook = {
+  #       file_path = "${path.module}/ansible-data/playbooks/install-tree.yml"
+  #       roles_path = [
+  #           "${path.module}/ansible-data/roles"
+  #       ]
+  #     }
+  #     groups = ["servers"]
+  #     verbose = true
+  #   }
+  #   ansible_ssh_settings {
+  #     insecure_no_strict_host_key_checking = "${var.insecure_no_strict_host_key_checking}"
+  #   }
+  # }    
 }
 
 
